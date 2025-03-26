@@ -6,8 +6,10 @@ const App = () => {
   const handleAddFighter = (zombie) => {
     if (money >= zombie.price) {
       setTeam([...team, zombie]);
-      const updatedZombieFighters = zombieFighters.filter(fighter => fighter.id !== zombie.id)
+      const updatedZombieFighters = zombieFighters.filter(fighter => fighter.id !== zombie.id) // Used .filter to create a new array excluding the selected zombie id.
       setZombieFighters(updatedZombieFighters)
+      const updatedMoney =  money - zombie.price //subtracting the price of the zombie from the total amount of money
+      setMoney(updatedMoney) //updating the state of money
     } else {
       console.log("Not enough money");
     }
