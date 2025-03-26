@@ -4,8 +4,14 @@ import "./index.css";
 
 const App = () => {
   const handleAddFighter = (zombie) => {
+    if (money >= zombie.price) {
+      setTeam([...team, zombie]);
+      const updatedZombieFighters = zombieFighters.filter(fighter => fighter.id !== zombie.id)
+      setZombieFighters(updatedZombieFighters)
+    } else {
+      console.log("Not enough money");
+    }
     console.log(zombie);
-    setTeam([...team, zombie]);
   };
 
   const [team, setTeam] = useState([]);
