@@ -16,6 +16,7 @@ const App = () => {
     console.log(zombie);
   };
 
+
   const [team, setTeam] = useState([]);
   const [money, setMoney] = useState(100);
   const [zombieFighters, setZombieFighters] = useState([
@@ -101,12 +102,15 @@ const App = () => {
     },
   ]);
 
+  const totalStrength = team.reduce((accumulator, zombie) => accumulator + zombie.strength,0) //Used .reduce to sum up strength and agility of team members
+  const totalAgility = team.reduce((accumulator, zombie) => accumulator + zombie.agility,0)
+
   return (
     <div>
       <h1>Zombie Fighters</h1>
       <p>Money Amount: ${money}</p>
-      <p>Team Strength: </p>
-      <p>Team Agility: </p>
+      <p>Team Strength: {totalStrength} </p>
+      <p>Team Agility: {totalAgility} </p>
       <p>
         Team:
         {team.length === 0
