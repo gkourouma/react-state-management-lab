@@ -11,11 +11,18 @@ const App = () => {
       const updatedMoney =  money - zombie.price //subtracting the price of the zombie from the total amount of money
       setMoney(updatedMoney) //updating the state of money
     } else {
-      console.log("Not enough money");
+      alert ("You do not have enough money");
     }
     console.log(zombie);
   };
 
+  const handleRemoveFighter = (zombie) => { //doing the complete opposite of the add function
+    setZombieFighters([...zombieFighters, zombie])
+    const updateTeam = team.filter(fighter => fighter.id !== zombie.id)
+    setTeam(updateTeam)
+    const updatedMoney = money + zombie.price
+    setMoney(updatedMoney)
+  }
 
   const [team, setTeam] = useState([]);
   const [money, setMoney] = useState(100);
@@ -26,7 +33,7 @@ const App = () => {
       price: 12,
       strength: 6,
       agility: 4,
-      img: "https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/0c2d6b.png",
+      img: "/survivor_imresizer.jpg",
     },
     {
       id: 2,
@@ -34,7 +41,7 @@ const App = () => {
       price: 10,
       strength: 5,
       agility: 5,
-      img: "https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/033a16.png",
+      img: "/scavenger.jpg",
     },
     {
       id: 3,
@@ -42,7 +49,7 @@ const App = () => {
       price: 18,
       strength: 7,
       agility: 8,
-      img: "https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/262c36.png",
+      img: "/shadow.jpg",
     },
     {
       id: 4,
@@ -50,7 +57,7 @@ const App = () => {
       price: 14,
       strength: 7,
       agility: 6,
-      img: "https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/3c1e70.png",
+      img: "/tracker.jpg",
     },
     {
       id: 5,
@@ -58,7 +65,7 @@ const App = () => {
       price: 20,
       strength: 6,
       agility: 8,
-      img: "https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/4b2900.png",
+      img: "/sharp.jpg",
     },
     {
       id: 6,
@@ -66,7 +73,7 @@ const App = () => {
       price: 15,
       strength: 5,
       agility: 7,
-      img: "https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/5a1e02.png",
+      img: "/medic.jpg",
     },
     {
       id: 7,
@@ -74,7 +81,7 @@ const App = () => {
       price: 16,
       strength: 6,
       agility: 5,
-      img: "https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/5e103e.png",
+      img: "/engineer.jpg",
     },
     {
       id: 8,
@@ -82,7 +89,7 @@ const App = () => {
       price: 11,
       strength: 8,
       agility: 3,
-      img: "https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/67060c.png",
+      img: "/brawler.jpg",
     },
     {
       id: 9,
@@ -90,7 +97,7 @@ const App = () => {
       price: 17,
       strength: 5,
       agility: 9,
-      img: "https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/ac3220.png",
+      img: "/infiltrator.jpg",
     },
     {
       id: 10,
@@ -98,7 +105,7 @@ const App = () => {
       price: 22,
       strength: 7,
       agility: 6,
-      img: "https://pages.git.generalassemb.ly/modular-curriculum-all-courses/react-state-management-lab/assets/e41f26.png",
+      img: "/leader.jpg",
     },
   ]);
 
@@ -113,17 +120,20 @@ const App = () => {
       <p>Team Agility: {totalAgility} </p>
       <p>
         Team:
+        <ul>
         {team.length === 0
           ? " Pick some Team members"
           : team.map((zombie) => (
               <li key={zombie.id}>
                 <img src={zombie.img} alt="" />
                 <h2>{zombie.name}</h2>
-                <p>Price: {zombie.price}</p>
+                <p>Price: ${zombie.price}</p>
                 <p>Strength: {zombie.strength}</p>
                 <p>Agility: {zombie.agility}</p>
+                <button onClick={() => handleRemoveFighter(zombie)}>Remove</button>
               </li>
             ))}
+            </ul>
       </p>
 
       <h2>Fighters</h2>
@@ -132,7 +142,7 @@ const App = () => {
           <li key={zombie.id}>
             <img src={zombie.img} alt="" />
             <h2>{zombie.name}</h2>
-            <p>Price: {zombie.price}</p>
+            <p>Price: ${zombie.price}</p>
             <p>Strength: {zombie.strength}</p>
             <p>Agility: {zombie.agility}</p>
             <button onClick={() => handleAddFighter(zombie)}>Add</button>
